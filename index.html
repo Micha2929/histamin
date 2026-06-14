@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Histamin-Suche</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 10px;
+    padding: 12px 20px;
+    font-size: 18px;
+}
+
+#ergebnis {
+    margin-top: 25px;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Histamin-Lebensmittelsuche</h1>
+
+<label for="suche">
+Lebensmittel eingeben:
+</label>
+
+<input
+id="suche"
+type="text"
+aria-label="Lebensmittel eingeben">
+
+<br>
+
+<button onclick="suche()">
+Suchen
+</button>
+
+<div
+id="ergebnis"
+tabindex="-1"
+aria-live="polite">
+
+Noch keine Suche durchgeführt.
+
+</div>
+
+<script>
+
+const daten = {
+
+"apfel":
+["Obst","Histaminfrei","Frisch meist gut verträglich"],
+
+"banane":
+["Obst","Histaminarm","Reifegrad beachten"],
+
+"tomate":
+["Gemüse","Histaminrisiko","Häufig problematisch"],
+
+"kartoffel":
+["Gemüse","Histaminfrei","Sehr gut geeignet"],
+
+"gurke":
+["Gemüse","Histaminfrei","Gut verträglich"],
+
+"joghurt":
+["Milchprodukte","Histaminarm","Fermentiert"],
+
+"reis":
+["Getreide","Histaminfrei","Sehr gut geeignet"],
+
+"wein":
+["Getränke","Histaminrisiko","Histaminreich"]
+
+};
+
+function suche() {
+
+const eingabe =
+document
+.getElementById("suche")
+.value
+.toLowerCase()
+.trim();
+
+const ausgabe =
+document.getElementById("ergebnis");
+
+if (!eingabe) {
+
+ausgabe.innerHTML =
+"<h2>Ergebnis</h2><p>Bitte ein Lebensmittel eingeben.</p>";
+
+return;
+
+}
+
+if (daten[eingabe]) {
+
+ausgabe.innerHTML =
+
+"<h2>Ergebnis</h2>" +
+
+"<p><strong>" +
+eingabe +
+"</strong></p>" +
+
+"<p>Kategorie: " +
+daten[eingabe][0] +
+"</p>" +
+
+"<p>Einstufung: " +
+daten[eingabe][1] +
+"</p>" +
+
+"<p>Hinweis: " +
+daten[eingabe][2] +
+"</p>";
+
+}
+else {
+
+ausgabe.innerHTML =
+
+"<h2>Ergebnis</h2>" +
+
+"<p>Lebensmittel nicht gefunden.</p>";
+
+}
+
+ausgabe.focus();
+
+}
+
+</script>
+
+</body>
+</html>
