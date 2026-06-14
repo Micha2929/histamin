@@ -100,7 +100,11 @@ const eingabe = document
 .getElementById("suche")
 .value
 .toLowerCase()
-.trim();
+.trim()
+.replace("ä","ae")
+.replace("ö","oe")
+.replace("ü","ue")
+.replace("ß","ss");
 
 const ausgabe =
 document.getElementById("ergebnis");
