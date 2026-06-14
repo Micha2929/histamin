@@ -96,8 +96,7 @@ const daten = {
 
 function suche() {
 
-const eingabe =
-document
+const eingabe = document
 .getElementById("suche")
 .value
 .toLowerCase()
@@ -115,42 +114,77 @@ return;
 
 }
 
-if (daten[eingabe]) {
+const treffer = Object.keys(daten)
+.filter(name =>
+name.toLowerCase().includes(eingabe)
+);
+
+if (treffer.length === 0) {
 
 ausgabe.innerHTML =
-
-"<h2>Ergebnis</h2>" +
-
-"<p><strong>" +
-eingabe +
-"</strong></p>" +
-
-"<p>Kategorie: " +
-daten[eingabe][0] +
-"</p>" +
-
-"<p>Einstufung: " +
-daten[eingabe][1] +
-"</p>" +
-
-"<p>Hinweis: " +
-daten[eingabe][2] +
-"</p>";
+"<h2>Ergebnis</h2><p>Kein Lebensmittel gefunden.</p>";
 
 }
 else {
 
-ausgabe.innerHTML =
-
+let html =
 "<h2>Ergebnis</h2>" +
+"<p>" + treffer.length +
+" Treffer gefunden</p>";
 
-"<p>Lebensmittel nicht gefunden.</p>";
+treffer.forEach(name => {
+
+html +=
+"<p><strong>" +
+name.charAt(0).toUpperCase() +
+name.slice(1) +
+"</strong><br>" +
+
+"Kategorie: " +
+daten[name][0] +
+"<br>" +
+
+"Einstufung: " +
+daten[name][1] +
+"<br>" +
+
+"Hinweis: " +
+daten[name][2] +
+"</p>";
+
+});
+
+ausgabe.innerHTML = html;
 
 }
 
-ausgabe.focus();
+document.getElementById("suche").value = "";
+document.getElementById("suche").focus();
 
 }
+
+function zuruecksetzen() {
+
+document.getElementById("suche").value = "";
+
+document.getElementById("ergebnis").innerHTML =
+"Noch keine Suche durchgeführt.";
+
+document.getElementById("suche").focus();
+
+}
+
+document
+.getElementById("suche")
+.addEventListener("keydown", function(event){
+
+if(event.key === "Enter"){
+suche();
+}
+
+});
+
+</script>
 
 </script>
 
