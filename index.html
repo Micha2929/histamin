@@ -2,60 +2,47 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Histamin-Suche</title>
-<style>
-body{font-family:Arial,sans-serif;max-width:800px;margin:20px auto;padding:10px;line-height:1.5}
-input,button{font-size:1.1rem;padding:10px}
-input{width:70%}
-button{margin-left:5px}
-#result{margin-top:20px;border:1px solid #ccc;padding:15px;border-radius:8px}
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Histamin-Suche V4</title>
 </head>
 <body>
-<h1>Histamin-Suche</h1>
-<p>Testversion auf Basis der Histamin_Datenbank_V4</p>
-
-<input id="suche" aria-label="Lebensmittel suchen" placeholder="Lebensmittel eingeben">
+<h1>Histamin-Suche V4</h1>
+<p>Basisversion mit den Datensätzen der V4.</p>
+<input id="q" placeholder="Lebensmittel eingeben">
 <button onclick="suche()">Suche</button>
-
-<div id="result" aria-live="polite">Bitte ein Lebensmittel eingeben.</div>
+<div id="result">Bitte Suchbegriff eingeben.</div>
 
 <script>
 const daten=[
-{name:"Tomate",syn:["Tomaten","Paradeiser"],kat:"Gemüse",vertr:"Unverträglich",hin:"Häufig problematisch."},
-{name:"Frischkäse",syn:[],kat:"Milchprodukte",vertr:"Gut verträglich",hin:"Frische Produkte meist besser verträglich."},
-{name:"Apfel",syn:[],kat:"Obst",vertr:"Gut verträglich",hin:""},
-{name:"Banane",syn:[],kat:"Obst",vertr:"Unverträglich",hin:""},
-{name:"Kartoffel",syn:["Erdapfel"],kat:"Stärke",vertr:"Gut verträglich",hin:""},
-{name:"Spinat",syn:[],kat:"Gemüse",vertr:"Unverträglich",hin:"Frische wichtig. Aufgewärmt oft problematisch."},
-{name:"Kamillentee",syn:[],kat:"Getränke",vertr:"Gut verträglich",hin:""},
-{name:"Wein",syn:[],kat:"Getränke",vertr:"Sehr schlecht verträglich",hin:""},
-{name:"Mozzarella",syn:[],kat:"Milchprodukte",vertr:"Gut verträglich",hin:""},
-{name:"Hähnchen",syn:["Huhn"],kat:"Fleisch",vertr:"Gut verträglich",hin:"Möglichst frisch."}
+{name:"Tomate",syn:["Tomaten","Paradeiser"],kat:"Gemüse"},
+{name:"Frischkäse",syn:["Frischkaese"],kat:"Milchprodukte"},
+{name:"Mozzarella",syn:[],kat:"Milchprodukte"},
+{name:"Quark",syn:[],kat:"Milchprodukte"},
+{name:"Apfel",syn:[],kat:"Obst"},
+{name:"Birne",syn:[],kat:"Obst"},
+{name:"Banane",syn:[],kat:"Obst"},
+{name:"Kartoffel",syn:["Erdapfel"],kat:"Stärke"},
+{name:"Hähnchen",syn:["Huhn","Haehnchen"],kat:"Fleisch"},
+{name:"Kamillentee",syn:[],kat:"Getränke"},
+{name:"Fencheltee",syn:[],kat:"Getränke"},
+{name:"Brokkoli",syn:[],kat:"Gemüse"},
+{name:"Blumenkohl",syn:[],kat:"Gemüse"},
+{name:"Spinat",syn:[],kat:"Gemüse"},
+{name:"Oregano",syn:[],kat:"Gewürze"},
+{name:"Petersilie",syn:[],kat:"Gewürze"},
+{name:"Walnuss",syn:[],kat:"Nüsse"},
+{name:"Mandel",syn:[],kat:"Nüsse"}
 ];
 
-function suche(){
- const feld=document.getElementById('suche');
- const q=feld.value.trim().toLowerCase();
- const r=document.getElementById('result');
- if(!q){r.innerHTML='Bitte Suchbegriff eingeben.'; return;}
- const t=daten.find(d=>d.name.toLowerCase()===q || d.syn.some(s=>s.toLowerCase()===q));
- if(t){
-   r.innerHTML=`<h2>${t.name}</h2>
-   <p><strong>Kategorie:</strong> ${t.kat}</p>
-   <p><strong>Verträglichkeit:</strong> ${t.vertr}</p>
-   <p><strong>Hinweis:</strong> ${t.hin || 'Kein Hinweis hinterlegt.'}</p>
-   <p><strong>Synonyme:</strong> ${t.syn.length?t.syn.join(', '):'Keine'}</p>`;
- } else {
-   r.innerHTML='Kein Eintrag gefunden.';
- }
- feld.value='';
- feld.focus();
+function norm(t){
+ return t.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').trim();
 }
-document.getElementById('suche').addEventListener('keydown',e=>{
- if(e.key==='Enter') suche();
-});
+function suche(){
+ let q=norm(document.getElementById('q').value);
+ let e=daten.find(d=>norm(d.name)==q || d.syn.some(s=>norm(s)==q));
+ document.getElementById('result').innerHTML=e ? '<h2>'+e.name+'</h2><p>Kategorie: '+e.kat+'</p>' : 'Kein Eintrag gefunden.';
+ document.getElementById('q').value='';
+}
 </script>
 </body>
 </html>
