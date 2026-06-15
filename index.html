@@ -1,134 +1,60 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Histamin-Suche</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    line-height: 1.5;
-}
-input {
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    box-sizing: border-box;
-}
-button {
-    margin-top: 10px;
-    padding: 12px 20px;
-    font-size: 18px;
-}
-#ergebnis {
-    margin-top: 25px;
-    padding: 15px;
-    border: 1px solid #ccc;
-}
-.treffer {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
+body{font-family:Arial,sans-serif;max-width:800px;margin:20px auto;padding:10px;line-height:1.5}
+input,button{font-size:1.1rem;padding:10px}
+input{width:70%}
+button{margin-left:5px}
+#result{margin-top:20px;border:1px solid #ccc;padding:15px;border-radius:8px}
 </style>
 </head>
 <body>
-<h1>Histamin-Lebensmittelsuche</h1>
-<label for="suche">Lebensmittel eingeben:</label>
-<input
-id="suche"
-type="text"
-aria-label="Lebensmittel eingeben">
-<button onclick="suche()">
-Suchen
-</button>
-<div
-id="ergebnis"
-tabindex="-1"
-aria-live="polite">
-Noch keine Suche durchgeführt.
-</div>
+<h1>Histamin-Suche</h1>
+<p>Testversion auf Basis der Histamin_Datenbank_V4</p>
+
+<input id="suche" aria-label="Lebensmittel suchen" placeholder="Lebensmittel eingeben">
+<button onclick="suche()">Suche</button>
+
+<div id="result" aria-live="polite">Bitte ein Lebensmittel eingeben.</div>
+
 <script>
-const daten = [
-{name:"Apfel",kategorie:"Obst",einstufung:"Histaminfrei",hinweis:"Meist gut verträglich",synonyme:[]},
-{name:"Birne",kategorie:"Obst",einstufung:"Histaminfrei",hinweis:"Meist gut verträglich",synonyme:[]},
-{name:"Banane",kategorie:"Obst",einstufung:"Histaminarm",hinweis:"Reifegrad beachten",synonyme:[]},
-{name:"Ananas",kategorie:"Obst",einstufung:"Histaminrisiko",hinweis:"Häufig unverträglich",synonyme:[]},
-{name:"Erdbeere",kategorie:"Obst",einstufung:"Histaminrisiko",hinweis:"Histaminliberator",synonyme:["Erdbeeren"]},
-{name:"Kiwi",kategorie:"Obst",einstufung:"Histaminrisiko",hinweis:"Histaminliberator",synonyme:[]},
-{name:"Orange",kategorie:"Obst",einstufung:"Histaminrisiko",hinweis:"Zitrusfrucht",synonyme:["Orangen"]},
-{name:"Papaya",kategorie:"Obst",einstufung:"Histaminfrei",hinweis:"Meist gut verträglich",synonyme:[]},
-{name:"Karotte",kategorie:"Gemüse",einstufung:"Histaminfrei",hinweis:"Gut verträglich",synonyme:["Karotten"]},
-{name:"Kartoffel",kategorie:"Gemüse",einstufung:"Histaminfrei",hinweis:"Sehr gut geeignet",synonyme:["Kartoffeln"]},
-{name:"Brokkoli",kategorie:"Gemüse",einstufung:"Histaminfrei",hinweis:"Gut verträglich",synonyme:[]},
-{name:"Blumenkohl",kategorie:"Gemüse",einstufung:"Histaminfrei",hinweis:"Gut verträglich",synonyme:[]},
-{name:"Gurke",kategorie:"Gemüse",einstufung:"Histaminfrei",hinweis:"Gut verträglich",synonyme:["Gurken"]},
-{name:"Kohlrabi",kategorie:"Gemüse",einstufung:"Histaminfrei",hinweis:"Gut verträglich",synonyme:[]},
-{name:"Tomate",kategorie:"Gemüse",einstufung:"Histaminrisiko",hinweis:"Häufig problematisch",synonyme:["Tomaten","Paradeiser"]},
-{name:"Spinat",kategorie:"Gemüse",einstufung:"Histaminrisiko",hinweis:"Histaminreich",synonyme:[]},
-{name:"Reis",kategorie:"Getreide",einstufung:"Histaminfrei",hinweis:"Sehr gut geeignet",synonyme:[]},
-{name:"Haferflocken",kategorie:"Getreide",einstufung:"Histaminfrei",hinweis:"Meist gut verträglich",synonyme:[]},
-{name:"Dinkel",kategorie:"Getreide",einstufung:"Histaminfrei",hinweis:"Meist gut verträglich",synonyme:[]},
-{name:"Milch",kategorie:"Milchprodukte",einstufung:"Histaminfrei",hinweis:"Individuell testen",synonyme:[]},
-{name:"Frischkäse",kategorie:"Milchprodukte",einstufung:"Histaminfrei",hinweis:"Meist gut verträglich",synonyme:[]},
-{name:"Mozzarella",kategorie:"Milchprodukte",einstufung:"Histaminfrei",hinweis:"Frisch bevorzugen",synonyme:[]},
-{name:"Joghurt",kategorie:"Milchprodukte",einstufung:"Histaminarm",hinweis:"Fermentiert",synonyme:["Naturjoghurt"]},
-{name:"Feta",kategorie:"Milchprodukte",einstufung:"Histaminarm",hinweis:"Reifegrad beachten",synonyme:[]},
-{name:"Camembert",kategorie:"Milchprodukte",einstufung:"Histaminrisiko",hinweis:"Gereift",synonyme:[]},
-{name:"Parmesan",kategorie:"Milchprodukte",einstufung:"Histaminrisiko",hinweis:"Lange gereift",synonyme:[]},
-{name:"Eier",kategorie:"Tierische Produkte",einstufung:"Histaminfrei",hinweis:"Frisch verwenden",synonyme:["Ei"]},
-{name:"Geflügel",kategorie:"Fleisch",einstufung:"Histaminfrei",hinweis:"Frische wichtig",synonyme:["Hähnchen"]},
-{name:"Rindfleisch",kategorie:"Fleisch",einstufung:"Histaminfrei",hinweis:"Frische wichtig",synonyme:["Rind"]},
-{name:"Wein",kategorie:"Getränke",einstufung:"Histaminrisiko",hinweis:"Histaminreich",synonyme:[]}
+const daten=[
+{name:"Tomate",syn:["Tomaten","Paradeiser"],kat:"Gemüse",vertr:"Unverträglich",hin:"Häufig problematisch."},
+{name:"Frischkäse",syn:[],kat:"Milchprodukte",vertr:"Gut verträglich",hin:"Frische Produkte meist besser verträglich."},
+{name:"Apfel",syn:[],kat:"Obst",vertr:"Gut verträglich",hin:""},
+{name:"Banane",syn:[],kat:"Obst",vertr:"Unverträglich",hin:""},
+{name:"Kartoffel",syn:["Erdapfel"],kat:"Stärke",vertr:"Gut verträglich",hin:""},
+{name:"Spinat",syn:[],kat:"Gemüse",vertr:"Unverträglich",hin:"Frische wichtig. Aufgewärmt oft problematisch."},
+{name:"Kamillentee",syn:[],kat:"Getränke",vertr:"Gut verträglich",hin:""},
+{name:"Wein",syn:[],kat:"Getränke",vertr:"Sehr schlecht verträglich",hin:""},
+{name:"Mozzarella",syn:[],kat:"Milchprodukte",vertr:"Gut verträglich",hin:""},
+{name:"Hähnchen",syn:["Huhn"],kat:"Fleisch",vertr:"Gut verträglich",hin:"Möglichst frisch."}
 ];
-function suche() {
-const eingabe = document
-.getElementById("suche")
-.value
-.toLowerCase()
-.trim();
-const ausgabe = document.getElementById("ergebnis");
-if (!eingabe) {
-ausgabe.innerHTML =
-"<h2>Ergebnis</h2><p>Bitte ein Lebensmittel eingeben.</p>";
-return;
+
+function suche(){
+ const feld=document.getElementById('suche');
+ const q=feld.value.trim().toLowerCase();
+ const r=document.getElementById('result');
+ if(!q){r.innerHTML='Bitte Suchbegriff eingeben.'; return;}
+ const t=daten.find(d=>d.name.toLowerCase()===q || d.syn.some(s=>s.toLowerCase()===q));
+ if(t){
+   r.innerHTML=`<h2>${t.name}</h2>
+   <p><strong>Kategorie:</strong> ${t.kat}</p>
+   <p><strong>Verträglichkeit:</strong> ${t.vertr}</p>
+   <p><strong>Hinweis:</strong> ${t.hin || 'Kein Hinweis hinterlegt.'}</p>
+   <p><strong>Synonyme:</strong> ${t.syn.length?t.syn.join(', '):'Keine'}</p>`;
+ } else {
+   r.innerHTML='Kein Eintrag gefunden.';
+ }
+ feld.value='';
+ feld.focus();
 }
-const treffer = daten.filter(item => {
-if(item.name.toLowerCase().includes(eingabe)) return true;
-return item.synonyme.some(
-s => s.toLowerCase().includes(eingabe)
-);
-});
-if (treffer.length === 0) {
-ausgabe.innerHTML =
-"<h2>Ergebnis</h2><p>Kein Lebensmittel gefunden.</p>";
-} else {
-let html =
-"<h2>Ergebnis</h2><p>" +
-treffer.length +
-" Treffer gefunden</p>";
-treffer.forEach(item => {
-html +=
-'<div class="treffer">' +
-'<strong>' + item.name + '</strong><br>' +
-'Kategorie: ' + item.kategorie + '<br>' +
-'Einstufung: ' + item.einstufung + '<br>' +
-'Hinweis: ' + item.hinweis +
-'</div>';
-});
-ausgabe.innerHTML = html;
-}
-document.getElementById("suche").value = "";
-document.getElementById("suche").focus();
-}
-document.getElementById("suche")
-.addEventListener("keydown", function(event){
-if(event.key === "Enter"){
-suche();
-}
+document.getElementById('suche').addEventListener('keydown',e=>{
+ if(e.key==='Enter') suche();
 });
 </script>
 </body>
