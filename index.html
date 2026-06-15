@@ -1,48 +1,35 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
+<html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Histamin-Suche V4</title>
-</head>
-<body>
+<style>
+body{font-family:Arial,sans-serif;max-width:900px;margin:auto;padding:20px;line-height:1.6}
+h1{text-align:center}
+input{width:75%;padding:14px;font-size:20px}
+button{padding:14px 20px;font-size:20px}
+#result{margin-top:20px;border:1px solid #ccc;border-radius:10px;padding:15px;min-height:80px}
+</style></head><body>
 <h1>Histamin-Suche V4</h1>
-<p>Basisversion mit den Datensätzen der V4.</p>
-<input id="q" placeholder="Lebensmittel eingeben">
+<p><strong>90 Lebensmittel erfasst</strong></p>
+<input id="q" placeholder="Lebensmittel eingeben" aria-label="Lebensmittel suchen">
 <button onclick="suche()">Suche</button>
-<div id="result">Bitte Suchbegriff eingeben.</div>
-
+<div id="result" aria-live="polite">Bitte ein Lebensmittel eingeben.</div>
 <script>
-const daten=[
-{name:"Tomate",syn:["Tomaten","Paradeiser"],kat:"Gemüse"},
-{name:"Frischkäse",syn:["Frischkaese"],kat:"Milchprodukte"},
-{name:"Mozzarella",syn:[],kat:"Milchprodukte"},
-{name:"Quark",syn:[],kat:"Milchprodukte"},
-{name:"Apfel",syn:[],kat:"Obst"},
-{name:"Birne",syn:[],kat:"Obst"},
-{name:"Banane",syn:[],kat:"Obst"},
-{name:"Kartoffel",syn:["Erdapfel"],kat:"Stärke"},
-{name:"Hähnchen",syn:["Huhn","Haehnchen"],kat:"Fleisch"},
-{name:"Kamillentee",syn:[],kat:"Getränke"},
-{name:"Fencheltee",syn:[],kat:"Getränke"},
-{name:"Brokkoli",syn:[],kat:"Gemüse"},
-{name:"Blumenkohl",syn:[],kat:"Gemüse"},
-{name:"Spinat",syn:[],kat:"Gemüse"},
-{name:"Oregano",syn:[],kat:"Gewürze"},
-{name:"Petersilie",syn:[],kat:"Gewürze"},
-{name:"Walnuss",syn:[],kat:"Nüsse"},
-{name:"Mandel",syn:[],kat:"Nüsse"}
-];
-
+const daten=[{name:"Eigelb",syn:[],kat:"Eier"},{name:"Eiklar",syn:['Eiweiß'],kat:"Eier"},{name:"Wachteleier",syn:[],kat:"Eier"},{name:"Frischkäse",syn:['Frischkaese'],kat:"Milchprodukte"},{name:"Mozzarella",syn:[],kat:"Milchprodukte"},{name:"Quark",syn:[],kat:"Milchprodukte"},{name:"Ricotta",syn:[],kat:"Milchprodukte"},{name:"Milch pasteurisiert",syn:[],kat:"Milchprodukte"},{name:"Joghurt nature",syn:['Naturjoghurt'],kat:"Milchprodukte"},{name:"Feta",syn:[],kat:"Milchprodukte"},{name:"Kefir",syn:[],kat:"Milchprodukte"},{name:"Sauerrahm",syn:[],kat:"Milchprodukte"},{name:"Mascarpone",syn:[],kat:"Milchprodukte"},{name:"Butterkäse",syn:[],kat:"Milchprodukte"},{name:"Camembert",syn:[],kat:"Milchprodukte"},{name:"Cheddar",syn:[],kat:"Milchprodukte"},{name:"Raclette",syn:[],kat:"Milchprodukte"},{name:"Emmentaler gereift",syn:[],kat:"Milchprodukte"},{name:"Hähnchen",syn:['Huhn', 'Haehnchen'],kat:"Fleisch"},{name:"Pute",syn:[],kat:"Fleisch"},{name:"Rindfleisch frisch",syn:[],kat:"Fleisch"},{name:"Kalbfleisch frisch",syn:[],kat:"Fleisch"},{name:"Ente",syn:[],kat:"Fleisch"},{name:"Hackfleisch frisch",syn:[],kat:"Fleisch"},{name:"Hackfleisch gelagert",syn:[],kat:"Fleisch"},{name:"Schweinefleisch",syn:[],kat:"Fleisch"},{name:"Salami",syn:[],kat:"Fleisch"},{name:"Rohschinken",syn:[],kat:"Fleisch"},{name:"Forelle",syn:[],kat:"Fisch"},{name:"Thunfisch",syn:[],kat:"Fisch"},{name:"Räucherlachs",syn:['Raeucherlachs'],kat:"Fisch"},{name:"Garnelen",syn:[],kat:"Meeresfrüchte"},{name:"Austern",syn:[],kat:"Meeresfrüchte"},{name:"Reis",syn:[],kat:"Getreide"},{name:"Hafer,Haferflocken",syn:['Haferflocken'],kat:"Getreide"},{name:"Dinkel",syn:[],kat:"Getreide"},{name:"Quinoa",syn:[],kat:"Getreide"},{name:"Kartoffel",syn:['Erdapfel'],kat:"Stärke"},{name:"Mais",syn:[],kat:"Getreide"},{name:"Walnuss",syn:[],kat:"Nüsse"},{name:"Mandel",syn:[],kat:"Nüsse"},{name:"Blumenkohl",syn:[],kat:"Gemüse"},{name:"Brokkoli",syn:[],kat:"Gemüse"},{name:"Fenchel",syn:[],kat:"Gemüse"},{name:"Karotte",syn:['Möhre', 'Moehre'],kat:"Gemüse"},{name:"Gurke",syn:['Salatgurke'],kat:"Gemüse"},{name:"Kürbis",syn:['Kuerbis'],kat:"Gemüse"},{name:"Aubergine",syn:[],kat:"Gemüse"},{name:"Tomate",syn:['Tomaten', 'Paradeiser'],kat:"Gemüse"},{name:"Spinat",syn:[],kat:"Gemüse"},{name:"Apfel",syn:[],kat:"Obst"},{name:"Aprikose",syn:[],kat:"Obst"},{name:"Birne",syn:[],kat:"Obst"},{name:"Blaubeere",syn:[],kat:"Obst"},{name:"Brombeere",syn:[],kat:"Obst"},{name:"Kaki",syn:['Persimone'],kat:"Obst"},{name:"Pfirsich",syn:[],kat:"Obst"},{name:"Nektarine",syn:[],kat:"Obst"},{name:"Sauerkirsche",syn:['Schattenmorelle'],kat:"Obst"},{name:"Stachelbeere",syn:[],kat:"Obst"},{name:"Preiselbeere",syn:[],kat:"Obst"},{name:"Banane",syn:[],kat:"Obst"},{name:"Orange",syn:['Apfelsine'],kat:"Obst"},{name:"Ananas",syn:[],kat:"Obst"},{name:"Papaya",syn:[],kat:"Obst"},{name:"Leitungswasser",syn:[],kat:"Getränke"},{name:"Mineralwasser ohne Kohlensäure",syn:[],kat:"Getränke"},{name:"Fencheltee",syn:[],kat:"Getränke"},{name:"Kamillentee",syn:[],kat:"Getränke"},{name:"Anistee",syn:[],kat:"Getränke"},{name:"Kümmeltee",syn:['Kuemmeltee'],kat:"Getränke"},{name:"Brennnesseltee",syn:[],kat:"Getränke"},{name:"Grüntee",syn:['Gruentee'],kat:"Getränke"},{name:"Bier",syn:[],kat:"Getränke"},{name:"Wein",syn:[],kat:"Getränke"},{name:"Petersilie",syn:[],kat:"Gewürze"},{name:"Oregano",syn:[],kat:"Gewürze"},{name:"Rosmarin",syn:[],kat:"Gewürze"},{name:"Thymian",syn:[],kat:"Gewürze"},{name:"Kardamom",syn:[],kat:"Gewürze"},{name:"Koriander",syn:[],kat:"Gewürze"},{name:"Kurkuma",syn:['Gelbwurz'],kat:"Gewürze"},{name:"Lorbeer",syn:[],kat:"Gewürze"},{name:"Paprikapulver mild",syn:[],kat:"Gewürze"},{name:"Paprikapulver scharf",syn:[],kat:"Gewürze"},{name:"Pfeffer schwarz",syn:[],kat:"Gewürze"},{name:"Senf",syn:[],kat:"Gewürze"},{name:"Zimt",syn:[],kat:"Gewürze"},{name:"Vanille",syn:[],kat:"Gewürze"},{name:"Ingwer",syn:[],kat:"Gewürze"}];
 function norm(t){
- return t.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').trim();
+return (t||"").toLowerCase().trim().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss");
 }
 function suche(){
- let q=norm(document.getElementById('q').value);
- let e=daten.find(d=>norm(d.name)==q || d.syn.some(s=>norm(s)==q));
- document.getElementById('result').innerHTML=e ? '<h2>'+e.name+'</h2><p>Kategorie: '+e.kat+'</p>' : 'Kein Eintrag gefunden.';
- document.getElementById('q').value='';
+let q=norm(document.getElementById('q').value);
+let f=daten.find(d=>norm(d.name)==q || d.syn.some(s=>norm(s)==q));
+let r=document.getElementById('result');
+if(f){
+r.innerHTML=`<h2>${f.name}</h2><p><b>Kategorie:</b> ${f.kat}</p><p><b>Synonyme:</b> ${f.syn.length?f.syn.join(", "):"Keine"}</p>`;
+} else {
+r.innerHTML="Kein Eintrag gefunden.";
 }
-</script>
-</body>
-</html>
+document.getElementById('q').value='';
+document.getElementById('q').focus();
+}
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter') suche();});
+</script></body></html>
