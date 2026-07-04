@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Histamin-Datenbank</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    color:#222;
+}
+main{
+    max-width:760px;
+    margin:0 auto;
+    padding:40px 20px;
+}
+header{
+    text-align:center;
+    margin-bottom:25px;
+}
+.search{
+    text-align:center;
+    margin-bottom:30px;
+}
+input[type=search]{
+    width:100%;
+    max-width:520px;
+    padding:14px;
+    font-size:1.1rem;
+    border:2px solid #777;
+    border-radius:10px;
+}
+#ergebnis{
+    margin-top:25px;
+}
+.card{
+    background:#fff;
+    border-radius:10px;
+    padding:16px;
+    margin-bottom:18px;
+}
+footer{
+    margin-top:40px;
+    border-top:1px solid #ddd;
+    padding-top:20px;
+}
+</style>
+</head>
+<body>
+<main>
+
+<header>
+<h1>Histamin-Datenbank</h1>
+<p>Willkommen bei der Histamin-Datenbank.</p>
+</header>
+
+<section class="search">
+<p>Die Einstufungen orientieren sich an der SIGHI-Lebensmittelliste und werden regelmäßig überprüft.</p>
+
+<label for="suche"><strong>Lebensmittel suchen</strong></label><br><br>
+
+<input id="suche"
+type="search"
+placeholder="Lebensmittel eingeben"
+aria-label="Lebensmittel suchen">
+</section>
+
+<div id="ergebnis" aria-live="polite"></div>
+
+<footer>
+<h2>Weitere Informationen</h2>
+
+<ul>
+<li>📖 Begriffserklärungen</li>
+<li>➕ Ein Lebensmittel fehlt?</li>
+<li>ℹ️ Über dieses Projekt</li>
+<li>⚖️ Qualitäts- und Haftungshinweise</li>
+</ul>
+</footer>
+
+</main>
+
+<script>
+let daten=[];
+
+fetch("daten.json")
+.then(r=>r.json())
+.then(d=>daten=d);
+
+const suche=document.getElementById("suche");
+const erg=document.getElementById("ergebnis");
+
+suche.addEventListener("input",()=>{
+
+const q=suche.value.trim().toLowerCase();
+
+if(!q){
+erg.innerHTML="";
+return;
+}
+
+const treffer=daten.filter(x=>
+x.lebensmittel.toLowerCase().includes(q) ||
+x.synonyme.some(s=>s.toLowerCase().includes(q))
+);
+
+if(treffer.length>10){
+erg.innerHTML="<div class='card'><p>Bitte verfeinern Sie Ihre Suche.</p></div>";
+return;
+}
+
+if(treffer.length>=4){
+erg.innerHTML="<div class='card'><ul>"+treffer.map(x=>"<li>"+x.lebensmittel+"</li>").join("")+"</ul></div>";
+return;
+}
+
+erg.innerHTML=treffer.map(x=>`
+<div class="card">
+<h2>${x.lebensmittel}</h2>
+<p><strong>${x.einstufung}</strong></p>
+${x.warum?`<h3>Warum diese Einstufung?</h3><p>${x.warum}</p>`:""}
+${x.hinweis?`<h3>Hinweis</h3><p>${x.hinweis}</p>`:""}
+${x.einkauf?`<h3>Beim Einkauf beachten</h3><p>${x.einkauf}</p>`:""}
+${x.wissenswert?`<h3>Wissenswert</h3><p>${x.wissenswert}</p>`:""}
+</div>`).join("");
+
+});
+</script>
+
+</body>
+</html>
