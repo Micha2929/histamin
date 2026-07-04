@@ -1,0 +1,387 @@
+[
+  {
+    "id": "H0001",
+    "status": "Überprüft",
+    "lebensmittel": "Milch",
+    "synonyme": [
+      "PAST-Milch",
+      "pasteurisierte Milch"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht fermentiertes Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0002",
+    "status": "Überprüft",
+    "lebensmittel": "Butter",
+    "synonyme": [
+      "Süßrahmbutter"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0003",
+    "status": "Überprüft",
+    "lebensmittel": "Frischkäse",
+    "synonyme": [
+      "Frischkaese"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht gereiftes Milchprodukt.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0004",
+    "status": "Überprüft",
+    "lebensmittel": "Naturjoghurt",
+    "synonyme": [
+      "Joghurt nature"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0005",
+    "status": "Überprüft",
+    "lebensmittel": "Griechischer Joghurt",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0006",
+    "status": "Überprüft",
+    "lebensmittel": "Skyr",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0007",
+    "status": "Überprüft",
+    "lebensmittel": "Quark",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht gereiftes Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0008",
+    "status": "Überprüft",
+    "lebensmittel": "Mozzarella",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht gereiftes Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0009",
+    "status": "Überprüft",
+    "lebensmittel": "Ricotta",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht gereiftes Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0010",
+    "status": "Überprüft",
+    "lebensmittel": "Feta",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟠 Häufig problematisch",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": "Nicht mit Hirtenkäse verwechseln.",
+    "wissenswert": null
+  },
+  {
+    "id": "H0011",
+    "status": "Überprüft",
+    "lebensmittel": "Hirtenkäse",
+    "synonyme": [
+      "Hirtenkaese"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟠 Häufig problematisch",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": "Nicht mit Feta verwechseln.",
+    "wissenswert": null
+  },
+  {
+    "id": "H0012",
+    "status": "Überprüft",
+    "lebensmittel": "Schafskäse",
+    "synonyme": [
+      "Schafskaese"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟠 Häufig problematisch",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0013",
+    "status": "Überprüft",
+    "lebensmittel": "Buttermilch",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0014",
+    "status": "Überprüft",
+    "lebensmittel": "Kefir",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0015",
+    "status": "Überprüft",
+    "lebensmittel": "Sauerrahm",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0016",
+    "status": "Überprüft",
+    "lebensmittel": "Schmand",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0017",
+    "status": "Überprüft",
+    "lebensmittel": "Crème fraîche",
+    "synonyme": [
+      "Creme fraiche"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Durch die Fermentation kann die Verträglichkeit variieren.",
+    "hinweis": "Möglichst Naturprodukt ohne Zusätze wählen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0018",
+    "status": "Überprüft",
+    "lebensmittel": "Mascarpone",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht gereiftes Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0019",
+    "status": "Überprüft",
+    "lebensmittel": "Hüttenkäse",
+    "synonyme": [
+      "Hüttenkaese",
+      "Cottage Cheese",
+      "Körniger Frischkäse"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht gereiftes Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0020",
+    "status": "Überprüft",
+    "lebensmittel": "Butterkäse",
+    "synonyme": [
+      "Butterkaese"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟢 Meist gut verträglich",
+    "warum": "Frisches, nicht gereiftes Milchprodukt.",
+    "hinweis": null,
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0021",
+    "status": "Überprüft",
+    "lebensmittel": "Tilsiter",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0022",
+    "status": "Überprüft",
+    "lebensmittel": "Gouda jung",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟡 Individuell testen",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Jüngere Varianten werden häufig besser vertragen.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0023",
+    "status": "Überprüft",
+    "lebensmittel": "Gouda gereift",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟠 Häufig problematisch",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0024",
+    "status": "Überprüft",
+    "lebensmittel": "Parmesan",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🔴 Meist unverträglich",
+    "warum": "Lange Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Bei Histaminintoleranz möglichst meiden.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0025",
+    "status": "Überprüft",
+    "lebensmittel": "Emmentaler",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🔴 Meist unverträglich",
+    "warum": "Lange Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Bei Histaminintoleranz möglichst meiden.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0026",
+    "status": "Überprüft",
+    "lebensmittel": "Bergkäse",
+    "synonyme": [
+      "Bergkaese"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🔴 Meist unverträglich",
+    "warum": "Lange Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Bei Histaminintoleranz möglichst meiden.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0027",
+    "status": "Überprüft",
+    "lebensmittel": "Cheddar",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟠 Häufig problematisch",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0028",
+    "status": "Überprüft",
+    "lebensmittel": "Brie",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟠 Häufig problematisch",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0029",
+    "status": "Überprüft",
+    "lebensmittel": "Camembert",
+    "synonyme": [],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🟠 Häufig problematisch",
+    "warum": "Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Die Verträglichkeit kann je nach Reifegrad variieren.",
+    "einkauf": null,
+    "wissenswert": null
+  },
+  {
+    "id": "H0030",
+    "status": "Überprüft",
+    "lebensmittel": "Edelschimmelkäse",
+    "synonyme": [
+      "Blauschimmelkäse"
+    ],
+    "kategorie": "Milchprodukte",
+    "einstufung": "🔴 Meist unverträglich",
+    "warum": "Lange Reifung kann die Histaminbildung begünstigen.",
+    "hinweis": "Bei Histaminintoleranz möglichst meiden.",
+    "einkauf": null,
+    "wissenswert": null
+  }
+]
