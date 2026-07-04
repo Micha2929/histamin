@@ -30,6 +30,27 @@ main{
     margin-bottom:16px;
 }
 
+input{
+    width:100%;
+    max-width:520px;
+    box-sizing:border-box;
+    padding:14px;
+    font-size:1.1rem;
+    border:2px solid #888;
+    border-radius:10px;
+    background:#fff;
+
+    /* verhindert das "Aufblähen" auf iOS */
+    appearance:none;
+    -webkit-appearance:none;
+}
+
+input:focus{
+    outline:none;
+    border:2px solid #005fcc;
+    box-shadow:none;
+}
+
 #ergebnis{
     width:100%;
     height:420px;
@@ -42,10 +63,18 @@ main{
     box-sizing:border-box;
 }
 
+.card{
+    background:#fff;
+    padding:16px;
+    border-radius:10px;
+    margin-bottom:16px;
+}
+
 .links{
     width:100%;
     margin-top:20px;
 }
+
 </style>
 
 </head>
