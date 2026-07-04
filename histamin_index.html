@@ -1,0 +1,10 @@
+<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Histamin-Datenbank</title><h1>Histamin-Datenbank</h1><label for="suche">Lebensmittel suchen</label><input id="suche" type="search"><div id="ergebnis" aria-live="polite"></div><script>
+let daten=[];fetch("daten.json").then(r=>r.json()).then(d=>daten=d);
+const s=document.getElementById("suche"),e=document.getElementById("ergebnis");
+s.oninput=()=>{const q=s.value.toLowerCase().trim();if(!q){e.innerHTML="";return;}
+const t=daten.filter(x=>x.lebensmittel.toLowerCase().includes(q)||x.synonyme.some(y=>y.toLowerCase().includes(q)));
+if(t.length>10){e.innerHTML="<p>Bitte verfeinern Sie Ihre Suche.</p>";return;}
+if(t.length>=4){e.innerHTML="<ul>"+t.map(x=>"<li>"+x.lebensmittel+"</li>").join("")+"</ul>";return;}
+e.innerHTML=t.map(x=>`<h2>${x.lebensmittel}</h2><p><strong>${x.einstufung}</strong></p>${x.warum?`<h3>Warum diese Einstufung?</h3><p>${x.warum}</p>`:""}${x.hinweis?`<h3>Hinweis</h3><p>${x.hinweis}</p>`:""}${x.einkauf?`<h3>Beim Einkauf beachten</h3><p>${x.einkauf}</p>`:""}${x.wissenswert?`<h3>Wissenswert</h3><p>${x.wissenswert}</p>`:""}`).join("");
+}
+</script></html>
