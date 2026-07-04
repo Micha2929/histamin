@@ -107,9 +107,9 @@ s.oninput=()=>{
     const q=s.value.trim().toLowerCase();
 
     if(!q){
-        e.innerHTML="";
-        return;
-    }
+    e.innerHTML='<p>Geben Sie oben ein Lebensmittel ein, um die Suche zu starten.</p>';
+    return;
+}
 
     const t=daten.filter(x=>
 
