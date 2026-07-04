@@ -1,2 +1,2 @@
 # Histamin-Suche
-durchsuche eine Datei nach Lebensmitteln und gebe als Ergebnis den Histaminwert aus
+Durchsucht eine Datei nach Lebensmitteln und gibt als Ergebnis eine Verzehrempfehlung aus.
