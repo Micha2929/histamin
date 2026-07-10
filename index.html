@@ -161,6 +161,8 @@ const e=document.getElementById("ergebnis");
 
 s.oninput=()=>{
 
+    e.innerHTML="Suche läuft";
+
     const q=s.value.trim().toLowerCase();
 
     if(!q){
