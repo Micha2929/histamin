@@ -22,7 +22,7 @@ main{
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding:20px 20px;
+    padding:20px;
 }
 
 .intro{
@@ -86,6 +86,17 @@ input:focus{
     line-height:1.4;
 }
 
+.trefferbutton{
+    width:100%;
+    text-align:left;
+    padding:12px;
+    margin:4px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    background:#fff;
+    font-size:1rem;
+}
+
 .links{
     width:100%;
     margin-top:20px;
@@ -131,19 +142,71 @@ input:focus{
 <script>
 
 let daten=[];
+let treffer=[];
 
 fetch("daten.json")
 .then(r => r.json())
 .then(d => {
-    daten = d;
+    daten=d;
 })
 .catch(err => {
     document.getElementById("ergebnis").innerHTML =
-        "<div class='card'>Fehler beim Laden der daten.json</div>";
+    "<div class='card'>Fehler beim Laden der daten.json</div>";
 });
 
 const s=document.getElementById("suche");
 const e=document.getElementById("ergebnis");
+
+function bewertungText(b){
+
+    if(b==="🟢") return "🟢 Meist gut verträglich";
+    if(b==="🟡") return "🟡 Individuell testen";
+    if(b==="🟠") return "🟠 Eher unverträglich";
+    if(b==="🔴") return "🔴 Meist unverträglich";
+
+    return b || "";
+}
+
+function zeigeDetail(x){
+
+    e.innerHTML=
+
+    "<div class='card'>"
+
+    +
+
+    "<h2>"+x.lebensmittel+"</h2>"
+
+    +
+
+    "<p><strong>"+bewertungText(x.bewertung)+"</strong></p>"
+
+    +
+
+    (x.grund ?
+    "<h3>Grund</h3><p>"+x.grund+"</p>"
+    : "")
+
+    +
+
+    (x.hinweis ?
+    "<h3>Hinweis</h3><p>"+x.hinweis+"</p>"
+    : "")
+
+    +
+
+    (x.kategorie ?
+    "<p><small>"+x.kategorie+"</small></p>"
+    : "")
+
+    +
+
+    "</div>";
+}
+
+function zeigeTreffer(index){
+    zeigeDetail(treffer[index]);
+}
 
 s.oninput=()=>{
 
@@ -154,7 +217,7 @@ s.oninput=()=>{
         return;
     }
 
-    const t=daten.filter(x=>
+    treffer=daten.filter(x=>
 
         (x.lebensmittel || "").toLowerCase().includes(q)
 
@@ -164,36 +227,42 @@ s.oninput=()=>{
 
     );
 
-    if(t.length===0){
+    if(treffer.length===0){
 
         e.innerHTML="<div class='card'>Kein Treffer gefunden.</div>";
         return;
-
     }
 
-    if(t.length>10){
+    if(treffer.length>10){
 
         e.innerHTML="<div class='card'>Bitte verfeinern Sie Ihre Suche.</div>";
         return;
-
     }
 
-    if(t.length>=4){
+    if(treffer.length>=4){
 
-        e.innerHTML="<div class='card'><ul>"+
+        e.innerHTML=
+        "<div class='card'><h2>Trefferliste</h2>" +
 
-            t.map(x=>"<li>"+x.lebensmittel+"</li>").join("")
+        treffer.map((x,i)=>
 
-            +
+            "<button class='trefferbutton' onclick='zeigeTreffer("+i+")'>"
+            +x.lebensmittel+
+            "</button>"
 
-            "</ul></div>";
+        ).join("")
+
+        +
+
+        "</div>";
 
         return;
-
     }
 
-    e.innerHTML=t.map(x=>
+    e.innerHTML="";
 
+    treffer.forEach(x=>{
+        e.innerHTML +=
         "<div class='card'>"
 
         +
@@ -202,13 +271,7 @@ s.oninput=()=>{
 
         +
 
-        "<p><strong>"+(x.bewertung || "")+"</strong></p>"
-
-        +
-
-        (x.kategorie ?
-        "<p><strong>Kategorie:</strong> "+x.kategorie+"</p>"
-        : "")
+        "<p><strong>"+bewertungText(x.bewertung)+"</strong></p>"
 
         +
 
@@ -224,14 +287,18 @@ s.oninput=()=>{
 
         +
 
-        "</div>"
+        (x.kategorie ?
+        "<p><small>"+x.kategorie+"</small></p>"
+        : "")
 
-    ).join("");
+        +
+
+        "</div>";
+    });
 
 }
 
 </script>
 
 </body>
-
 </html>
