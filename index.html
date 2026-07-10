@@ -39,8 +39,6 @@ input{
     border:2px solid #888;
     border-radius:10px;
     background:#fff;
-
-    /* verhindert das "Aufblähen" auf iOS */
     appearance:none;
     -webkit-appearance:none;
 }
@@ -53,7 +51,7 @@ input:focus{
 
 #ergebnis{
     width:100%;
-    height:420px;
+    min-height:420px;
     margin-top:20px;
     overflow-y:auto;
     background:#fff;
@@ -65,35 +63,27 @@ input:focus{
 
 .card{
     background:#fff;
-    padding:6px 0;
-    margin:0;
-    border-radius:0;
+    padding:12px 0;
     border-bottom:1px solid #ccc;
-}
-
-.card h2{
-    margin:0 0 4px 0;
-    font-size:1.1rem;
-}
-
-.card h3{
-    margin:8px 0 2px 0;
-    font-size:0.95rem;
-}
-
-.card p{
-    margin:2px 0;
-    line-height:1.25;
-    font-size:0.95rem;
 }
 
 .card:last-child{
     border-bottom:none;
 }
 
-.links{
-    width:100%;
-    margin-top:20px;
+.card h2{
+    margin:0 0 8px 0;
+    font-size:1.2rem;
+}
+
+.card h3{
+    margin:10px 0 4px 0;
+    font-size:1rem;
+}
+
+.card p{
+    margin:4px 0;
+    line-height:1.4;
 }
 
 .links{
@@ -110,11 +100,7 @@ input:focus{
 <main>
 
 <div class="intro">
-
 <p>Willkommen bei der Histamin-Datenbank.</p>
-
-
-
 </div>
 
 <input
@@ -150,40 +136,44 @@ fetch("daten.json")
 .then(r => r.json())
 .then(d => {
     daten = d;
+})
+.catch(err => {
     document.getElementById("ergebnis").innerHTML =
-        "Geladen: " + daten.length + " Datensätze";
+        "<div class='card'>Fehler beim Laden der daten.json</div>";
 });
-.then(r=>r.json())
-.then(d=>daten=d);
 
 const s=document.getElementById("suche");
 const e=document.getElementById("ergebnis");
 
 s.oninput=()=>{
 
-    e.innerHTML="Suche läuft";
-
     const q=s.value.trim().toLowerCase();
 
     if(!q){
-    e.innerHTML='<p>Geben Sie oben ein Lebensmittel ein, um die Suche zu starten.</p>';
-    return;
-}
+        e.innerHTML='<p>Geben Sie oben ein Lebensmittel ein, um die Suche zu starten.</p>';
+        return;
+    }
 
     const t=daten.filter(x=>
 
-        x.lebensmittel.toLowerCase().includes(q)
+        (x.lebensmittel || "").toLowerCase().includes(q)
 
         ||
 
-        x.synonyme.some(y=>y.toLowerCase().includes(q))
+        ((x.synonyme || "").toLowerCase().includes(q))
 
     );
+
+    if(t.length===0){
+
+        e.innerHTML="<div class='card'>Kein Treffer gefunden.</div>";
+        return;
+
+    }
 
     if(t.length>10){
 
         e.innerHTML="<div class='card'>Bitte verfeinern Sie Ihre Suche.</div>";
-
         return;
 
     }
@@ -212,31 +202,25 @@ s.oninput=()=>{
 
         +
 
-        "<p><strong>"+x.einstufung+"</strong></p>"
+        "<p><strong>"+(x.bewertung || "")+"</strong></p>"
 
         +
 
-        (x.warum?
-"<p>"+x.warum+"</p>"
-:"")
+        (x.kategorie ?
+        "<p><strong>Kategorie:</strong> "+x.kategorie+"</p>"
+        : "")
 
         +
 
-        (x.hinweis?
+        (x.grund ?
+        "<h3>Grund</h3><p>"+x.grund+"</p>"
+        : "")
+
+        +
+
+        (x.hinweis ?
         "<h3>Hinweis</h3><p>"+x.hinweis+"</p>"
-        :"")
-
-        +
-
-        (x.einkauf?
-        "<h3>Beim Einkauf beachten</h3><p>"+x.einkauf+"</p>"
-        :"")
-
-        +
-
-        (x.wissenswert?
-        "<h3>Wissenswert</h3><p>"+x.wissenswert+"</p>"
-        :"")
+        : "")
 
         +
 
