@@ -147,6 +147,12 @@ input:focus{
 let daten=[];
 
 fetch("daten.json")
+.then(r => r.json())
+.then(d => {
+    daten = d;
+    document.getElementById("ergebnis").innerHTML =
+        "Geladen: " + daten.length + " Datensätze";
+});
 .then(r=>r.json())
 .then(d=>daten=d);
 
